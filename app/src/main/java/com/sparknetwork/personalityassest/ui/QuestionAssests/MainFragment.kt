@@ -27,7 +27,10 @@ import java.lang.RuntimeException
  */
 
 class MainFragment : Fragment(), OptionClickckedLiscner {
+
+
     override fun onOptionClicked(option: String) {
+        // Get selected option and store to submit at the end
         viewModel?.loadNextQuestion()
     }
 
@@ -51,8 +54,39 @@ class MainFragment : Fragment(), OptionClickckedLiscner {
             .get(MainViewModel::class.java)
 
         initObservers()
+        initListner()
     }
 
+    private fun initListner() {
+        btn_submit?.setOnClickListener {
+            //On submit trigger submit api
+        }
+        btn_restart?.setOnClickListener {
+           // on restart reload the view and fetch the updated data
+            fetchDataAgain()
+        }
+    }
+
+    /**
+     *
+     * Reloads the view
+     *
+     */
+    private fun reloadView() {
+       // viewModel.questionIndex = 0
+        btn_restart?.visibility = View.GONE
+        btn_submit?.visibility = View.GONE
+
+        spinnerCategories?.visibility = View.VISIBLE
+        recycleOptions?.visibility = View.VISIBLE
+
+        txt_questions?.text = getString(R.string.msg_submit)
+    }
+
+    /**
+     * Init Observers
+     *
+     */
     private fun initObservers() {
         viewModel.isViewLoading.observe(this, isViewLoadingObserver)
         viewModel.onMessageError.observe(this, onMessageErrorObserver)
@@ -85,6 +119,12 @@ class MainFragment : Fragment(), OptionClickckedLiscner {
             }
         }
     }
+
+    /**
+     * All the used Observers
+     * to populate data and to display error handling messages
+     *
+     */
 
     private val isViewLoadingObserver = Observer<Boolean> {
         Log.v(TAG, "isViewLoading $it")
@@ -120,6 +160,13 @@ class MainFragment : Fragment(), OptionClickckedLiscner {
             }
             PersonalityAssestState.End -> {
                 //submit quiz
+                btn_restart?.visibility = View.VISIBLE
+                btn_submit?.visibility = View.VISIBLE
+
+                spinnerCategories?.visibility = View.GONE
+                recycleOptions?.visibility = View.GONE
+
+                txt_questions?.text = getString(R.string.msg_submit)
             }
 
             else -> {
@@ -140,9 +187,9 @@ class MainFragment : Fragment(), OptionClickckedLiscner {
     }
 
     private val categoryObserver = Observer<List<String>> { categories ->
+        reloadView()
 
         categories.let { setCategorySpinner(it) }
-
     }
 
     private fun setOptionsView(options: List<String>) {
@@ -155,9 +202,19 @@ class MainFragment : Fragment(), OptionClickckedLiscner {
 
     }
 
+    /**
+     * View to display messages and reload data once fails
+     *
+     */
+
     fun showMessage(msg: String) =
         Snackbar.make(main, msg, Snackbar.LENGTH_LONG)
             .setAction("Try Again") {
-                viewModel.fetchTestData()
+                fetchDataAgain()
             }.show()
+
+   fun fetchDataAgain(){
+       viewModel.questionIndex = 0
+       viewModel.fetchTestData()
+    }
 }

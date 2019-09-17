@@ -21,17 +21,15 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     flavorDimensions "default"
     productFlavors {
         def COMMON_URL = 'COMMON_URL'
-        def IMAGE_BASE_URL = 'IMAGE_BASE_URL'
-        // def MOVIE_API_KEY = 'MOVIE_API_KEY'
         dev {
-            buildConfigField 'String', COMMON_URL, '"http://192.168.1.167:8092/"'
+            buildConfigField 'String', COMMON_URL, '"http://192.8.5.86:8092/"'
 
 
             applicationIdSuffix ".dev"
@@ -42,7 +40,7 @@ android {
 
 
         prod {
-            buildConfigField 'String', COMMON_URL, '"http://192.168.1.167:8092/"'
+            buildConfigField 'String', COMMON_URL, '"http://192.8.5.86:8092/"'
 
 
             applicationIdSuffix ""

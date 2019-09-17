@@ -16,7 +16,7 @@ object DummyModels {
 
 
     fun getQuestion(): Question {
-        return Question(
+        return Question("sgdgdghjsf",
             "What is your gender?",
             "hard_fact",
             QuestionType("single_choice", listOf("male", "female", "other"))
@@ -24,7 +24,7 @@ object DummyModels {
     }
 
     fun getNullQuestion(): Question {
-        return Question(
+        return Question("sdfsdfs",
             null,
             "hard_fact",
             QuestionType("single_choice", null)

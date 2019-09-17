@@ -1,18 +1,28 @@
 package com.sparknetwork.personalityassest.data.remote
 
 import android.util.Log
+import com.sparknetwork.personalityassest.BuildConfig
 import com.sparknetwork.personalityassest.data.model.DataResult
 import com.sparknetwork.personalityassest.util.ApiUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
+
+/**
+ * Created by rahul.p
+ * on 9/15/2019
+ * as project Personality Assesstment
+ *
+ */
 const val TAG="CONSOLE"
 
-class MuseumRepository: ResultDataSource {
+
+class ResultRepository: ResultDataSource {
 
     private var call:Call<DataResult>?=null
-    private val retrofit = ApiUtils.getClosedRetrofit("http://192.168.1.167:8092/")
+    private val retrofit = ApiUtils.getClosedRetrofit(BuildConfig.COMMON_URL)
     private val apiClient = retrofit.create(PersonalityService::class.java)
 
     override fun retrieveTestData(callback: OperationCallback) {

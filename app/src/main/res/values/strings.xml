@@ -2,4 +2,5 @@
     <string name="app_name">PersonalityAssest</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="error_string">Something went wrong</string>
+    <string name="msg_submit">Submit your data</string>
 </resources>

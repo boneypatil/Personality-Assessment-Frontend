@@ -1,12 +1,12 @@
 package com.sparknetwork.personalityassest.di
 
 import com.sparknetwork.personalityassest.data.remote.ResultDataSource
-import com.sparknetwork.personalityassest.data.remote.MuseumRepository
+import com.sparknetwork.personalityassest.data.remote.ResultRepository
 
 object Injection {
 
-    //MuseumRepository could be a singleton
+    //ResultRepository could be a singleton
     fun providerRepository(): ResultDataSource {
-        return MuseumRepository()
+        return ResultRepository()
     }
 }

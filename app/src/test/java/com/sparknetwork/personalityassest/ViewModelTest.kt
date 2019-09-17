@@ -23,6 +23,12 @@ import org.mockito.Mockito.verify
  * as project Personality Assesstment
  *
  */
+
+/**
+ * As only single api is being used and it contains questions and categories in same
+ * root so below is the test of category
+ *
+ */
 class ViewModelTest {
 
     @Mock

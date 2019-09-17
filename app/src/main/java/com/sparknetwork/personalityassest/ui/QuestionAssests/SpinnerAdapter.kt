@@ -36,9 +36,6 @@ class SpinnerAdapter(val context: Context, var listItemsTxt: List<String>) : Bas
             vh = view.tag as ItemRowHolder
         }
 
-        // setting adapter item height programatically.
-
-
 
         vh.label.text = listItemsTxt.get(position).capitalize()
         return view
